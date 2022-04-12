@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isVisible" class="loader-display" />
+  <div v-if="isVisible" class="loader-basic" />
 </template>
 
 <script setup>
@@ -10,13 +10,13 @@ const isVisible = computed(() => isLoading.value)
 </script>
 
 <style>
-@keyframes loader-display-spinning {
+@keyframes loader-basic-spinning {
   from { transform: rotate(0turn); }
   to   { transform: rotate(1turn); }
 }
 
-.loader-display {
-  animation: 1s loader-display-spinning linear infinite;
+.loader-basic {
+  animation: 1s loader-basic-spinning linear infinite;
   background: red;
   display: block;
   width: 64px;
@@ -24,5 +24,6 @@ const isVisible = computed(() => isLoading.value)
   position: fixed;
   left: calc(50%/1 - 32px/1);
   top: calc(50%/1 - 32px/1);
+  z-index: 2147483647;
 }
 </style>

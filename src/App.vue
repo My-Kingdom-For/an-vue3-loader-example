@@ -1,5 +1,5 @@
 <template>
-  <loader-display />
+  <loader-enhanced />
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import LoaderDisplay from '@/components/LoaderDisplay.vue'
+import LoaderEnhanced from '@/components/LoaderEnhanced.vue'
 </script>
 
 <style>
