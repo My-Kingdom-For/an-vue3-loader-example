@@ -1,5 +1,10 @@
+import { ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+
+export const isLoading = ref(true)
+const dtLoader = 2000 // minimum display time
+let debounceLoading = 0
 
 const routes = [
   {
@@ -10,9 +15,6 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   }
 ]
@@ -20,6 +22,15 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach(() => {
+  window.clearTimeout(debounceLoading)
+  isLoading.value = true
+})
+router.afterEach(() => {
+  window.clearTimeout(debounceLoading)
+  debounceLoading = window.setTimeout(() => (isLoading.value = false), dtLoader)
 })
 
 export default router
