@@ -24,7 +24,11 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach(() => {
+router.beforeEach((to, from) => {
+  if (to.fullPath.split('#')[0] === from.fullPath.split('#')[0]) {
+    return // ignore hash change
+  }
+
   window.clearTimeout(debounceLoading)
   isLoading.value = true
 })
